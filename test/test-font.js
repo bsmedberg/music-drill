@@ -39,29 +39,44 @@ function eventHandler(e) {
     return;
   }
 
-  console.log(e.type);
-
-  pt.x = e.clientX;
-  pt.y = e.clientY;
+  if (e.touches !== undefined && e.touches > 1) {
+    gCurrent = null;
+    updateView();
+    return;
+  }
 
   switch (e.type) {
     case "mouseleave":
+    case "touchleave":
+    case "touchcancel":
       if (gCurrent != null) {
         gCurrent = null;
         updateView();
       }
       return;
     case "mousemove":
+    case "touchmove":
       if (gCurrent == null) {
         return;
       }
+      break;
     case "mousedown":
+    case "touchstart":
       note.classList.remove("red");
       break;
     case "mouseup":
+    case "touchend":
       break;
     default:
       throw Error("Unexpected event");
+  }
+
+  if (e instanceof MouseEvent) {
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+  } else {
+    pt.x = e.changedTouches[0].clientX;
+    pt.y = e.changedTouches[0].clientY;
   }
 
   var staffpt = pt.matrixTransform(g.getScreenCTM().inverse());
@@ -81,7 +96,7 @@ function eventHandler(e) {
   gCurrent = staffpos;
   updateView();
 
-  if (e.type == "mouseup") {
+  if (e.type == "mouseup" || e.type == "touchend") {
     var r = document.getElementById("result");
     if (gCurrent == 2) {
       note.classList.add("green");
@@ -102,3 +117,8 @@ svg.addEventListener("mousedown", eventHandler, false);
 svg.addEventListener("mouseup", eventHandler, false);
 svg.addEventListener("mouseleave", eventHandler, false);
 svg.addEventListener("mousemove", eventHandler, false);
+svg.addEventListener("touchstart", eventHandler, false);
+svg.addEventListener("touchend", eventHandler, false);
+svg.addEventListener("touchcancel", eventHandler, false);
+svg.addEventListener("touchleave", eventHandler, false);
+svg.addEventListener("touchmove", eventHandler, false);
