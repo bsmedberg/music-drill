@@ -1,0 +1,28 @@
+.staffLine {
+  fill: none;
+  stroke: black;
+  stroke-width: 15;
+}
+.ledgerLine {
+  fill: none;
+  stroke: black;
+  stroke-width: 25;
+}
+.greyFill {
+  fill: #666;
+}
+.greyLine {
+  stroke: #666;
+}
+.red {
+  fill: red;
+}
+.green {
+  fill: green;
+}
+.success {
+  color: green;
+}
+.failure {
+  color: red;
+}

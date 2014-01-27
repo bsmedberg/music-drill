@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Testing Staff</title>
+  <link rel="stylesheet" type="text/css" href="../resources/staffStyle.css">
+  <link rel="stylesheet" type="text/css" href="../resources/generic.css">
+
+  <style type="text/css">
+    #staff {
+      width: 40%;
+    }
+  </style>
+<body>
+  <h1>Testing Staff</h1>
+
+  <p>Click on g&#8242; <span id="result"></span></p>
+
+  <svg id="staff" viewBox="0 0 2000 2400">
+    <g id="sg" transform="translate(100 700)">
+      <line x1="0" y1="0" x2="4000" y2="0" class="staffLine"/>
+      <line x1="0" y1="250" x2="4000" y2="250" class="staffLine"/>
+      <line x1="0" y1="500" x2="4000" y2="500" class="staffLine"/>
+      <line x1="0" y1="750" x2="4000" y2="750" class="staffLine"/>
+      <line x1="0" y1="1000" x2="4000" y2="1000" class="staffLine"/>
+
+      <use x="50" y="750" xlink:href="../resources/emmentaler-16.svg#clefs.G" fill="black"/>
+      <use id="note" x="1000" y="-333" xlink:href="../resources/emmentaler-16.svg#noteheads.s0" class="greyFill hidden"/>
+
+      <line id="ledgerb1" x1="900" x2="1500" y1="1250" y2="1250" class="hidden
+ledgerLine"/>
+      <line id="ledgerb2" x1="900" x2="1500" y1="1500" y2="1500" class="hidden
+ledgerLine"/>
+      <line id="ledgert1" x1="900" x2="1500" y1="-250" y2="-250" class="hidden
+ledgerLine"/>
+      <line id="ledgert2" x1="900" x2="1500" y1="-500" y2="-500" class="hidden
+ledgerLine"/>
+    </g>
+  </svg>
+
+  <script src="test-font.js"></script>
