@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <title>Treble Clef Reading</title>
+  <link rel="stylesheet" type="text/css" href="../resources/staffStyle.css">
+  <link rel="stylesheet" type="text/css" href="../resources/generic.css">
+
+  <style type="text/css">
+    h1 {
+      text-align: center;
+    }
+    #main {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-flow: column;
+      height: 100%;
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      align-items: stretch;
+    }
+    #staff {
+      flex: 1 1 auto;
+    }
+    #timer {
+      display: block;
+      float: right;
+      padding: 4px;
+      border: 1px solid #333;
+    }
+    #time {
+      display: inline-block;
+      width: 4em;
+      text-align: right;
+      font-family: monospace;
+    }
+    #resultButtons {
+      min-height: 2.5cm;
+      display: flex;
+      flex-flow: row;
+      color: #4d4a3e;
+      font-weight: bold;
+      font-size: 1.2cm;
+      justify-content: center;
+      align-items: stretch;
+      margin-top: 2px;
+    }
+    .resultButton {
+      display: flex;
+      text-align: center;
+      width: 2.5cm;
+      margin-right: 2px;
+      margin-left: 2px;
+      border-radius: 0.5cm;
+      border: 1px outset #ede6c0;
+      cursor: pointer;
+      background-color: #EDE6C0;
+      font-size: 1.2cm;
+    }
+    .resultButton:active {
+      background-color: #d9d2b0;
+      border: 1px inset #d9d2b0;
+    }
+    .mainOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-flow: column;
+      height: 100%;
+      width: 100%;
+      padding: 20%;
+      justify-content: center;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      text-align: center;
+      background-color: rgba(180,180,180,0.7);
+    }
+    #resultBox {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      background-color: #3f5a70;
+      border: 0.3cm solid #1d2933;
+      min-height: 50%;
+      color: white;
+      padding: 3em;
+    }
+    #resultStar {
+      vertical-align: middle;
+    }
+    #goLabel {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      border: 0.3cm outset #060;
+      border-radius: 1cm;
+      height: 50%;
+      background-color: #060;
+      color: white;
+      font-size: 5em;
+      cursor: pointer;
+    }
+    #doneLabel {
+      font-size: 5em;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+    #doneDetails {
+      font-style: italic;
+    }
+    #goLabel:active {
+      border: 0.3cm inset #060;
+      background-color: #090;
+    }
+    #goLabel > span {
+      display: block;
+    }
+    #result {
+      stroke: black;
+      stroke-width: 10;
+      fill: none;
+    }
+    #result.ok {
+      animation: okresult 500ms ease-in 0s 1 normal;
+    }
+    #result.fail {
+      animation: failresult 500ms ease-in 0s 1 normal;
+    }
+    @keyframes okresult {
+      from {
+        fill: rgba(0,200,0,1);
+      }
+      to {
+        fill: rgba(0,200,0,0);
+      }
+    }
+    @keyframes failresult {
+      from {
+        fill: rgba(255,0,0,1);
+      }
+      to {
+        fill: rgba(255,0,0,0);
+      }
+    }
+  </style>
+<body>
+  <div id="main">
+
+  <h1>Treble Clef Reading</h1>
+
+  <svg id="staff" viewBox="0 0 2500 2400">
+    <!--<rect x="0" y="0" width="2000" height="2400" stroke="blue" stroke-width="20"fill="none"/>-->
+    <g id="sg" transform="translate(600 700)">
+      <circle cx="-500" cy="500" r="200" id="result"/>
+      <line x1="0" y1="0" x2="1800" y2="0" class="staffLine"/>
+      <line x1="0" y1="250" x2="1800" y2="250" class="staffLine"/>
+      <line x1="0" y1="500" x2="1800" y2="500" class="staffLine"/>
+      <line x1="0" y1="750" x2="1800" y2="750" class="staffLine"/>
+      <line x1="0" y1="1000" x2="1800" y2="1000" class="staffLine"/>
+
+      <use x="50" y="750" xlink:href="../resources/emmentaler-16.svg#clefs.G" fill="black"/>
+      <use id="note" x="1000" y="-333" xlink:href="../resources/emmentaler-16.svg#noteheads.s0" class="hidden"/>
+
+      <line id="ledgerb1" x1="900" x2="1500" y1="1250" y2="1250" class="hidden
+ledgerLine"/>
+      <line id="ledgerb2" x1="900" x2="1500" y1="1500" y2="1500" class="hidden
+ledgerLine"/>
+      <line id="ledgert1" x1="900" x2="1500" y1="-250" y2="-250" class="hidden
+ledgerLine"/>
+      <line id="ledgert2" x1="900" x2="1500" y1="-500" y2="-500" class="hidden
+ledgerLine"/>
+    </g>
+  </svg>
+
+  <p id="controls">
+    <span id="timer">Time: <span id="time">0:00</span></span>
+
+    Completed: <span id="completed">0</span> Missed: <span id="missed">0</span>
+      
+  </p>
+
+  <div id="resultButtons">
+    <input id="resultC" type="button" class="resultButton" value="C">
+    <input id="resultD" type="button" class="resultButton" value="D">
+    <input id="resultE" type="button" class="resultButton" value="E">
+    <input id="resultF" type="button" class="resultButton" value="F">
+    <input id="resultG" type="button" class="resultButton" value="G">
+    <input id="resultA" type="button" class="resultButton" value="A">
+    <input id="resultB" type="button" class="resultButton" value="B">
+  </div>
+
+  <div id="goContainer" class="mainOverlay">
+    <a id="goLabel">
+      <span>
+      Go!
+      </span>
+    </a>
+  </div>
+
+  <div id="resultContainer" class="hidden mainOverlay">
+    <div id="resultBox">
+      <p id="doneLabel">
+        <img id="resultStar" src="../resources/star-rating-icon.png">
+        Done!
+      <p id="doneDetails">
+        Completed <span id="resultCount"></span> in <span id="resultTime"></span>.
+        <span id="resultErrors" class="hidden"></span><br>
+        <span id="rate"></span> per second.
+    </div>
+  </div>
+
+  </div>
+
+  <script src="treble-clef.js"></script>
