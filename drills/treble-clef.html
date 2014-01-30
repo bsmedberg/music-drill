@@ -7,25 +7,6 @@
   <link rel="stylesheet" type="text/css" href="../resources/generic.css">
 
   <style type="text/css">
-    h1 {
-      text-align: center;
-    }
-    #main {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: flex;
-      flex-flow: column;
-      height: 100%;
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      align-items: stretch;
-    }
-    #staff {
-      flex: 1 1 auto;
-    }
     #timer {
       display: block;
       float: right;
@@ -78,7 +59,6 @@
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       text-align: center;
-      background-color: rgba(180,180,180,0.7);
     }
     #resultBox {
       display: flex;
@@ -91,7 +71,7 @@
       padding: 3em;
     }
     #resultStar {
-      vertical-align: middle;
+      align-self: center;
     }
     #goLabel {
       display: flex;
@@ -147,13 +127,35 @@
         fill: rgba(255,0,0,0);
       }
     }
+    .buttonLink {
+      background-color: #CCC;
+      border: 2px outset #CCC;
+      display: flex;
+      flex-flow: column;
+      text-align: center;
+      justify-content: center;
+      min-width: 10em;
+      margin: 4px;
+      color: black !important;
+      padding: 8px;
+      text-decoration: none;
+    }
+    .buttonLink:active {
+      background-color: #EEE;
+      border: 2px inset #EEE;
+    }
+    #backlinks {
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+    }
   </style>
 <body>
-  <div id="main">
+  <div id="main" class="column fullScreen">
 
   <h1>Treble Clef Reading</h1>
 
-  <svg id="staff" viewBox="0 0 2500 2400">
+  <svg id="staff" class="expand" viewBox="0 0 2500 2400">
     <!--<rect x="0" y="0" width="2000" height="2400" stroke="blue" stroke-width="20"fill="none"/>-->
     <g id="sg" transform="translate(600 700)">
       <circle cx="-500" cy="500" r="200" id="result"/>
@@ -194,7 +196,7 @@ ledgerLine"/>
     <input id="resultB" type="button" class="resultButton" value="B">
   </div>
 
-  <div id="goContainer" class="mainOverlay">
+  <div id="goContainer" class="fullScreen overlay column">
     <a id="goLabel">
       <span>
       Go!
@@ -202,15 +204,19 @@ ledgerLine"/>
     </a>
   </div>
 
-  <div id="resultContainer" class="hidden mainOverlay">
+  <div id="resultContainer" class="hidden fullScreen overlay column">
     <div id="resultBox">
-      <p id="doneLabel">
-        <img id="resultStar" src="../resources/star-rating-icon.png">
-        Done!
+      <img id="resultStar" src="../resources/star-rating-icon.png" width="96" height="96">
+      <p id="doneLabel">Done!
       <p id="doneDetails">
         Completed <span id="resultCount"></span> in <span id="resultTime"></span>.
         <span id="resultErrors" class="hidden"></span><br>
-        <span id="rate"></span> per second.
+        <span id="rate"></span> seconds per note.
+
+        <div id="backlinks">
+          <a class="buttonLink" href="treble-clef.html">Try Again</a>
+          <a class="buttonLink" href="..">Main Menu</a>
+        </div>
     </div>
   </div>
 

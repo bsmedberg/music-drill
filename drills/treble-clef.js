@@ -82,7 +82,6 @@ function buttonListener(e)
     if (gCount == gTestCount) {
       gDone = (Date.now() - gStartTime) / 1000;
       clearInterval(gInterval);
-      g("time").style.color = "green";
       showDone();
     } else {
       noteStart();
@@ -104,7 +103,7 @@ function showDone()
     e.textContent = "Errors: " + gMissed + ".";
     e.classList.remove("hidden");
   }
-  g("rate").textContent = (gCount / gDone).toFixed(1);
+  g("rate").textContent = (gDone / gCount).toFixed(1);
   g("resultContainer").classList.remove("hidden");
 }
 

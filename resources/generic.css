@@ -2,6 +2,42 @@ body {
   font-family: sans-serif;
 }
 
+h1 {
+  text-align: center;
+}
+
 .hidden {
   visibility: hidden;
+}
+
+.row {
+  display: flex;
+  flex-flow: row;
+}
+
+.column {
+  display: flex;
+  flex-flow: column;
+}
+
+.expand {
+  flex: 1 1 auto;
+}
+
+.fullScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  padding: 8px;
+}
+
+.overlay {
+  padding: 8px 20%;
+  background-color: rgba(180,180,180,0.7);
+  text-align: center;
+  justify-content: center;
 }
