@@ -1,0 +1,32 @@
+<head>
+  <meta charset="UTF-8">
+  <title>test format()</title>
+
+<body>
+  <h1>Test format()</h1>
+
+  <div id="results"></div>
+
+  <script src="../resources/library.js"></script>
+  <script src="testrunner.js"></script>
+  <script>
+    var gTests = [
+      [[""], ""],
+      [["%s"], TestRunner.Exception],
+      [["%s", "f"], "f"],
+      [["  %s  ", "f"], "  f  "],
+      [["%r", "foo"], TestRunner.Exception],
+      [["%%"], "%"],
+      [["%% %%"], "% %"],
+      [["%s%s", 123, 456], "123456"],
+      [["%(foo)s"], TestRunner.Exception],
+      [["hello%(foo)s", {foo: "!"}], "hello!"],
+      [["hello%(foo)s", 1, 2], TestRunner.Exception],
+      [["hello%", 1], TestRunner.Exception],
+      [["I am %(0)s you are %(1)s", "me", "you"], "I am me you are you"],
+      [["You are %(1)s I am %(0)s", "me", "you"], "You are you I am me"],
+      [["I am %(o)s you are %(1)s", "me", "you"], TestRunner.Exception],
+      [["You are %(1)s I am %(o)s", "me", "you"], TestRunner.Exception],
+    ];
+    TestRunner.testFunction(format, gTests);
+  </script>

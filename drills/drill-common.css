@@ -1,0 +1,26 @@
+#result {
+  stroke: black;
+  fill: none;
+}
+#result.ok {
+  animation: okresult 500ms ease-in 0s 1 normal;
+}
+#result.fail {
+  animation: failresult 500ms ease-in 0s 1 normal;
+}
+@keyframes okresult {
+  from {
+    fill: rgba(0,200,0,1);
+  }
+  to {
+    fill: rgba(0,200,0,0);
+  }
+}
+@keyframes failresult {
+  from {
+    fill: rgba(255,0,0,1);
+  }
+  to {
+    fill: rgba(255,0,0,0);
+  }
+}

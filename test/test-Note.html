@@ -1,0 +1,59 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Test Note</title>
+<body>
+  <h1>Test Note</h1>
+
+  <table id="notes" border="1" cellpadding="1" cellspacing="0">
+  </table>
+
+  <script src="../resources/library.js"></script>
+
+  <script>
+  function makeRow(l) {
+    var r = document.createElement("tr");
+    for (var i = 0; i < l.length; ++i) {
+      var c = document.createElement("td");
+      c.textContent = l[i];
+      r.appendChild(c);
+    }
+    document.getElementById("notes").appendChild(r);
+  }
+
+  for (var x = 0; x <= 56; ++x) {
+    var n = new Note({pos: x, mod: Note.FLAT});
+    makeRow([x, "FLAT", n.scale(), n.note(), n.pitch(), n.toString(), n.frequency()]);
+    n = new Note({pos: x, mod: Note.NATURAL});
+    makeRow([x, "NATURAL", n.scale(), n.note(), n.pitch(), n.toString(), n.frequency()]);
+    n = new Note({pos: x, mod: Note.SHARP});
+    makeRow([x, "SHARP", n.scale(), n.note(), n.pitch(), n.toString(), n.frequency()]);
+  }
+  var gAudio = AudioContext();
+  var gCurrentNote = 0;
+  var gCurrentOscillator = null;
+  var gCurrentGain;
+
+  function playNextNote() {
+    if (gCurrentOscillator) {
+      gCurrentGain.gain.value = 0;
+      gCurrentOscillator.stop(0);
+    }
+    if (gCurrentNote > 49) {
+      return;
+    }
+    n = new Note({pos: gCurrentNote, mod: Note.NATURAL});
+    gCurrentOscillator = gAudio.createOscillator();
+    gCurrentOscillator.type = "square";
+    gCurrentGain = gAudio.createGain();
+    gCurrentOscillator.frequency.value = n.frequency();
+    console.log("Playing frequency", gCurrentOscillator.frequency.value);
+    gCurrentGain.connect(gAudio.destination);
+    gCurrentOscillator.connect(gCurrentGain);
+    gCurrentGain.gain.value = 0;
+    gCurrentOscillator.start(0);
+    gCurrentGain.gain.linearRampToValueAtTime(1, 5);
+    setTimeout(playNextNote, 400);
+    gCurrentNote++;
+  }
+  playNextNote();
+  </script>

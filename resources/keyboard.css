@@ -1,0 +1,12 @@
+.keyboard.key.white {
+  fill: #FAF8EF;
+}
+.keyboard.key.black {
+  fill: black;
+}
+.keyboard.key.highlight {
+  fill: #7646A3;
+}
+.keyboard.background {
+  fill: #8A887C;
+}

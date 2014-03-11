@@ -41,3 +41,109 @@ h1 {
   text-align: center;
   justify-content: center;
 }
+
+.buttonLink {
+  background-color: #CCC;
+  border: 2px outset #CCC;
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+  justify-content: center;
+  margin: 4px;
+  color: black !important;
+  padding: 8px;
+  text-decoration: none;
+}
+.buttonLink:active {
+  background-color: #EEE;
+  border: 2px inset #EEE;
+}
+
+input[type="button"] {
+  min-height: 2.5cm;
+  min-width: 2.5cm;
+}
+#noteButtons {
+  min-height: 2.5cm;
+  display: flex;
+  flex-flow: row;
+  color: #4d4a3e;
+  font-weight: bold;
+  font-size: 1.2cm;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 2px;
+}
+.noteButton {
+  display: flex;
+  text-align: center;
+  width: 2.5cm;
+  margin-right: 2px;
+  margin-left: 2px;
+  border-radius: 0.5cm;
+  border: 1px outset #ede6c0;
+  cursor: pointer;
+  background-color: #EDE6C0;
+  font-size: 1.2cm;
+}
+.noteButton:active {
+  background-color: #d9d2b0;
+  border: 1px inset #d9d2b0;
+}
+#timer {
+  display: block;
+  float: right;
+  padding: 4px;
+  border: 1px solid #333;
+}
+#time {
+  display: inline-block;
+  width: 4em;
+  text-align: right;
+  font-family: monospace;
+}
+#resultBox {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  background-color: #3f5a70;
+  border: 0.3cm solid #1d2933;
+  min-height: 50%;
+  color: white;
+  padding: 3em;
+}
+#resultStar {
+  align-self: center;
+}
+#goLabel {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  border: 0.3cm outset #060;
+  border-radius: 1cm;
+  height: 50%;
+  background-color: #060;
+  color: white;
+  font-size: 5em;
+  cursor: pointer;
+}
+#doneLabel {
+  font-size: 5em;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+#doneDetails {
+  font-style: italic;
+}
+#goLabel:active {
+  border: 0.3cm inset #060;
+  background-color: #090;
+}
+#goLabel > span {
+  display: block;
+}
+#backlinks {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}

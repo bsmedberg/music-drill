@@ -5,149 +5,11 @@
   <title>Treble Clef Reading</title>
   <link rel="stylesheet" type="text/css" href="../resources/staffStyle.css">
   <link rel="stylesheet" type="text/css" href="../resources/generic.css">
+  <link rel="stylesheet" type="text/css" href="drill-common.css">
 
   <style type="text/css">
-    #timer {
-      display: block;
-      float: right;
-      padding: 4px;
-      border: 1px solid #333;
-    }
-    #time {
-      display: inline-block;
-      width: 4em;
-      text-align: right;
-      font-family: monospace;
-    }
-    #resultButtons {
-      min-height: 2.5cm;
-      display: flex;
-      flex-flow: row;
-      color: #4d4a3e;
-      font-weight: bold;
-      font-size: 1.2cm;
-      justify-content: center;
-      align-items: stretch;
-      margin-top: 2px;
-    }
-    .resultButton {
-      display: flex;
-      text-align: center;
-      width: 2.5cm;
-      margin-right: 2px;
-      margin-left: 2px;
-      border-radius: 0.5cm;
-      border: 1px outset #ede6c0;
-      cursor: pointer;
-      background-color: #EDE6C0;
-      font-size: 1.2cm;
-    }
-    .resultButton:active {
-      background-color: #d9d2b0;
-      border: 1px inset #d9d2b0;
-    }
-    .mainOverlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: flex;
-      flex-flow: column;
-      height: 100%;
-      width: 100%;
-      padding: 20%;
-      justify-content: center;
-      box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      text-align: center;
-    }
-    #resultBox {
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      background-color: #3f5a70;
-      border: 0.3cm solid #1d2933;
-      min-height: 50%;
-      color: white;
-      padding: 3em;
-    }
-    #resultStar {
-      align-self: center;
-    }
-    #goLabel {
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      border: 0.3cm outset #060;
-      border-radius: 1cm;
-      height: 50%;
-      background-color: #060;
-      color: white;
-      font-size: 5em;
-      cursor: pointer;
-    }
-    #doneLabel {
-      font-size: 5em;
-      margin-bottom: 5px;
-      margin-top: 5px;
-    }
-    #doneDetails {
-      font-style: italic;
-    }
-    #goLabel:active {
-      border: 0.3cm inset #060;
-      background-color: #090;
-    }
-    #goLabel > span {
-      display: block;
-    }
-    #result {
-      stroke: black;
-      stroke-width: 10;
-      fill: none;
-    }
-    #result.ok {
-      animation: okresult 500ms ease-in 0s 1 normal;
-    }
-    #result.fail {
-      animation: failresult 500ms ease-in 0s 1 normal;
-    }
-    @keyframes okresult {
-      from {
-        fill: rgba(0,200,0,1);
-      }
-      to {
-        fill: rgba(0,200,0,0);
-      }
-    }
-    @keyframes failresult {
-      from {
-        fill: rgba(255,0,0,1);
-      }
-      to {
-        fill: rgba(255,0,0,0);
-      }
-    }
-    .buttonLink {
-      background-color: #CCC;
-      border: 2px outset #CCC;
-      display: flex;
-      flex-flow: column;
-      text-align: center;
-      justify-content: center;
+    .backLink {
       min-width: 10em;
-      margin: 4px;
-      color: black !important;
-      padding: 8px;
-      text-decoration: none;
-    }
-    .buttonLink:active {
-      background-color: #EEE;
-      border: 2px inset #EEE;
-    }
-    #backlinks {
-      display: flex;
-      flex-flow: row;
-      justify-content: center;
     }
   </style>
 <body>
@@ -158,7 +20,7 @@
   <svg id="staff" class="expand" viewBox="0 0 2500 2400">
     <!--<rect x="0" y="0" width="2000" height="2400" stroke="blue" stroke-width="20"fill="none"/>-->
     <g id="sg" transform="translate(600 700)">
-      <circle cx="-500" cy="500" r="200" id="result"/>
+      <circle cx="-500" cy="500" r="200" id="result" stroke-width="10"/>
       <line x1="0" y1="0" x2="1800" y2="0" class="staffLine"/>
       <line x1="0" y1="250" x2="1800" y2="250" class="staffLine"/>
       <line x1="0" y1="500" x2="1800" y2="500" class="staffLine"/>
@@ -186,14 +48,14 @@ ledgerLine"/>
       
   </p>
 
-  <div id="resultButtons">
-    <input id="resultC" type="button" class="resultButton" value="C">
-    <input id="resultD" type="button" class="resultButton" value="D">
-    <input id="resultE" type="button" class="resultButton" value="E">
-    <input id="resultF" type="button" class="resultButton" value="F">
-    <input id="resultG" type="button" class="resultButton" value="G">
-    <input id="resultA" type="button" class="resultButton" value="A">
-    <input id="resultB" type="button" class="resultButton" value="B">
+  <div id="noteButtons">
+    <input id="resultC" type="button" class="noteButton" value="C">
+    <input id="resultD" type="button" class="noteButton" value="D">
+    <input id="resultE" type="button" class="noteButton" value="E">
+    <input id="resultF" type="button" class="noteButton" value="F">
+    <input id="resultG" type="button" class="noteButton" value="G">
+    <input id="resultA" type="button" class="noteButton" value="A">
+    <input id="resultB" type="button" class="noteButton" value="B">
   </div>
 
   <div id="goContainer" class="fullScreen overlay column">
@@ -214,12 +76,14 @@ ledgerLine"/>
         <span id="rate"></span> seconds per note.
 
         <div id="backlinks">
-          <a class="buttonLink" href="treble-clef.html">Try Again</a>
-          <a class="buttonLink" href="..">Main Menu</a>
+          <a class="buttonLink backLink" href="treble-clef.html">Try Again</a>
+          <a class="buttonLink backLink" href="..">Main Menu</a>
         </div>
     </div>
   </div>
 
   </div>
 
+  <script src="../resources/library.js"></script>
+  <script src="drill-common.js"></script>
   <script src="treble-clef.js"></script>
